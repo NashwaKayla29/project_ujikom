@@ -1,6 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use Alert;
+use App\Models\Data_Qc;
+use App\Models\Jahit;
 use App\Models\Qc;
 use Illuminate\Http\Request;
 
@@ -25,7 +28,11 @@ class QcController extends Controller
      */
     public function create()
     {
-        //
+        $Qc      = Qc::all();
+        $data_Qc = Data_Qc::all();
+        $jahit   = Jahit::all();
+        return view('admin.Qc.create', compact('Qc', 'data_Qc', 'jahit'));
+
     }
 
     /**
@@ -36,7 +43,24 @@ class QcController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $validated = $request->validate([
+//     'bahan_id'          => 'required',
+//     'hasil_potong_pola' => 'required',
+//     'jumlah_potong'     => 'required',
+//     'tanggal_potong'    => 'required',
+// ]);
+
+        $Qc                 = new Qc();
+        $Qc->qc_id          = $request->qc_id;
+        $Qc->jahit_id       = $request->jahit_id;
+        $Qc->lolos_Qc       = $request->lolos_Qc;
+        $Qc->cacat_jual     = $request->cacat_jual;
+        $Qc->cacat_permanen = $request->cacat_permanen;
+        $Qc->save();
+
+        Alert::success('Success', 'Data berhasil di tambah')->autoClose(1000);
+        return redirect()->route('Qc.index');
+
     }
 
     /**
@@ -45,7 +69,7 @@ class QcController extends Controller
      * @param  \App\Models\Qc  $qc
      * @return \Illuminate\Http\Response
      */
-    public function show(Qc $qc)
+    public function show($id)
     {
         //
     }
@@ -56,9 +80,13 @@ class QcController extends Controller
      * @param  \App\Models\Qc  $qc
      * @return \Illuminate\Http\Response
      */
-    public function edit(Qc $qc)
+    public function edit($id)
     {
-        //
+        $Qc      = Qc::findOrFail($id);
+        $data_Qc = Data_Qc::all();
+        $jahit   = Jahit::all();
+        return view('admin.Qc.edit', compact('Qc', 'data_Qc', 'jahit'));
+
     }
 
     /**
@@ -68,9 +96,27 @@ class QcController extends Controller
      * @param  \App\Models\Qc  $qc
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Qc $qc)
+    public function update(Request $request, $id)
     {
-        //
+        // $validated = $request->validate([
+        //     'nama_Qc'          => 'required',
+        //     'nama_barang' => 'required',
+        //     'lolos_Qc'     => 'required',
+        //     'cacat_jual'    => 'required',
+        //     'cacat_permanen'    => 'required',
+        // ]);
+
+        $Qc                 = Qc::findOrFail($id);
+        $Qc->qc_id          = $request->qc_id;
+        $Qc->jahit_id       = $request->jahit_id;
+        $Qc->lolos_Qc       = $request->lolos_Qc;
+        $Qc->cacat_jual     = $request->cacat_jual;
+        $Qc->cacat_permanen = $request->cacat_permanen;
+        $Qc->save();
+
+        Alert::success('Success', 'Data berhasil di ubah')->autoClose(1000);
+        return redirect()->route('Qc.index');
+
     }
 
     /**
@@ -79,8 +125,13 @@ class QcController extends Controller
      * @param  \App\Models\Qc  $qc
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Qc $qc)
+    public function destroy($id)
     {
-        //
+        $Qc = Qc::findOrFail($id);
+        $Qc->delete();
+
+        Alert::success('Success', 'Data berhasil di hapus')->autoClose(1000);
+        return redirect()->route('Qc.index');
+
     }
 }

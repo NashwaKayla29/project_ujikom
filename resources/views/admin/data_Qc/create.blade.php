@@ -7,7 +7,7 @@
             <h5 class="mb-0">Tambah Data Qc</h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('data_Qc.store') }}" method="POST">
+            <form action="{{ route('data_Qc.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="basic-default-fullname">Nama Qc</label>

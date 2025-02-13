@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nama_barang');
             $table->unsignedBigInteger('potong_id');
             $table->unsignedBigInteger('pegawai_id');
+            $table->date('tanggal_jahit');
             $table->string('lolos');
             $table->string('cacat');
             $table->timestamps();

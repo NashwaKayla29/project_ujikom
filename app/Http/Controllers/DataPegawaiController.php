@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataPegawai;
+Use Alert;
 use Illuminate\Http\Request;
 
 class DataPegawaiController extends Controller
@@ -44,6 +45,7 @@ class DataPegawaiController extends Controller
         $data_pegawai->nama_pegawai = $request->nama_pegawai;
         $data_pegawai->save();
 
+        Alert::success('Success', 'Data berhasil di tambah')->autoClose(1000);
         return redirect()->route('data_pegawai.index');
 
     }
@@ -89,6 +91,7 @@ class DataPegawaiController extends Controller
         $data_pegawai->nama_pegawai = $request->nama_pegawai;
         $data_pegawai->save();
 
+        Alert::success('Success', 'Data berhasil di ubah')->autoClose(1000);
         return redirect()->route('data_pegawai.index');
     }
 
@@ -102,6 +105,8 @@ class DataPegawaiController extends Controller
     {
         $data_pegawai = DataPegawai::findOrFail($id);
         $data_pegawai->delete();
+
+        Alert::success('Success', 'Data berhasil di hapus')->autoClose(1000);
         return redirect()->route('data_pegawai.index');
 
     }

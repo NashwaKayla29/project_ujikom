@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bahan;
+Use Alert;
+use Carbon;
 use Illuminate\Http\Request;
 
 class BahanController extends Controller
@@ -44,6 +46,7 @@ class BahanController extends Controller
             'yard'                => 'required',
         ]);
 
+        $tanggal_masuk_bahan = Carbon::parse($request->tanggal_masuk_bahan)->format('d F Y');
         $bahan                      = new Bahan();
         $bahan->nama_bahan          = $request->nama_bahan;
         $bahan->ukuran_bahan        = $request->ukuran_bahan;
@@ -52,6 +55,7 @@ class BahanController extends Controller
         $bahan->yard                = $request->yard;
         $bahan->save();
 
+        Alert::success('Success', 'Data berhasil di tambah')->autoClose(1000);
         return redirect()->route('bahan.index');
 
     }
@@ -97,6 +101,7 @@ class BahanController extends Controller
             'yard'                => 'required',
         ]);
 
+        $tanggal_masuk_bahan = Carbon::parse($request->tanggal_masuk_bahan)->format('d F Y');
         $bahan                      = Bahan::findOrFail($id);
         $bahan->nama_bahan          = $request->nama_bahan;
         $bahan->ukuran_bahan        = $request->ukuran_bahan;
@@ -105,6 +110,7 @@ class BahanController extends Controller
         $bahan->yard                = $request->yard;
         $bahan->save();
 
+        Alert::success('Success', 'Data berhasil di ubah')->autoClose(1000);
         return redirect()->route('bahan.index');
 
     }
@@ -119,6 +125,8 @@ class BahanController extends Controller
     {
         $bahan = Bahan::findOrFail($id);
         $bahan->delete();
+
+        Alert::success('Success', 'Data berhasil di hapus')->autoClose(1000);
         return redirect()->route('bahan.index');
 
     }

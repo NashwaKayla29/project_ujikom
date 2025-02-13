@@ -31,7 +31,7 @@
                     <label class="col-sm-2 col-form-label" for="basic-default-fullname">Hasil Potong Pola</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="hasil_potong_pola" placeholder="hasil potong pola"
-                            name="hasil_potong_pola" />
+                            name="hasil_potong_pola" value="{{$potong->hasil_potong_pola}}"/>
                         @error('hasil_potong_pola')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -42,7 +42,7 @@
                     <label class="col-sm-2 col-form-label" for="basic-default-fullname">Jumlah potong</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="jumlah_potong" placeholder="jumlah potong"
-                            name="jumlah_potong" />
+                            name="jumlah_potong" value="{{$potong->jumlah_potong}}"/>
                         @error('jumlah_potong')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -53,7 +53,7 @@
                     <label class="col-sm-2 col-form-label" for="basic-default-fullname">Tanggal potong</label>
                     <div class="col-sm-10">
                         <input type="date" class="form-control" id="tanggal_potong" placeholder="tanggal potong"
-                            name="tanggal_potong" />
+                            name="tanggal_potong" value="{{$potong->tanggal_potong}}"/>
                         @error('tanggal_potong')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror

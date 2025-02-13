@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use App\Models\bahan;
 use App\Models\potong;
+Use Alert;
+use Carbon;
 use Illuminate\Http\Request;
 
 class PotongController extends Controller
@@ -47,6 +49,7 @@ class PotongController extends Controller
         //     'tanggal_potong'    => 'required',
         // ]);
 
+        $tanggal_potong = Carbon::parse($request->tanggal_potong)->format('d F Y');
         $potong                    = new Potong();
         $potong->bahan_id          = $request->bahan_id;
         $potong->hasil_potong_pola = $request->hasil_potong_pola;
@@ -54,6 +57,7 @@ class PotongController extends Controller
         $potong->tanggal_potong    = $request->tanggal_potong;
         $potong->save();
 
+        Alert::success('Success', 'Data berhasil di tambah')->autoClose(1000);
         return redirect()->route('potong.index');
 
     }
@@ -99,6 +103,7 @@ class PotongController extends Controller
             'tanggal_potong'    => 'required',
         ]);
 
+        $tanggal_potong = Carbon::parse($request->tanggal_potong)->format('d F Y');
         $potong                    = Potong::findOrFail($id);
         $potong->bahan_id          = $request->bahan_id;
         $potong->hasil_potong_pola = $request->hasil_potong_pola;
@@ -106,6 +111,7 @@ class PotongController extends Controller
         $potong->tanggal_potong    = $request->tanggal_potong;
         $potong->save();
 
+        Alert::success('Success', 'Data berhasil di ubah')->autoClose(1000);
         return redirect()->route('potong.index');
     }
 
@@ -119,6 +125,8 @@ class PotongController extends Controller
     {
         $potong = Potong::findOrFail($id);
         $potong->delete();
+
+        Alert::success('Success', 'Data berhasil di hapus')->autoClose(1000);
         return redirect()->route('potong.index');
 
     }

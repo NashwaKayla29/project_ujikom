@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\DataPegawai;
 use App\Models\jahit;
 use App\Models\potong;
-use App\Models\Data_Qc;
-
+Use Alert;
+use Carbon;
 use Illuminate\Http\Request;
 
 class JahitController extends Controller
@@ -28,10 +29,10 @@ class JahitController extends Controller
      */
     public function create()
     {
-        $jahit = Jahit::all();
-        $potong  = Potong::all();
-        $data_Qc = Data_Qc::all();
-        return view('admin.jahit.create', compact('jahit', 'potong', 'data_Qc'));
+        $jahit        = Jahit::all();
+        $potong       = Potong::all();
+        $data_pegawai = DataPegawai::all();
+        return view('admin.jahit.create', compact('jahit', 'potong', 'data_pegawai'));
 
     }
 
@@ -43,22 +44,25 @@ class JahitController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'nama_penjahit'     => 'required',
-            'hasil_potong_pola' => 'required',
-            'nama_barang'       => 'required',
-            'lolos'             => 'required',
-            'cacat'             => 'required',
-        ]);
+        // $validated = $request->validate([
+        //     'nama_penjahit'     => 'required',
+        //     'hasil_potong_pola' => 'required',
+        //     'nama_barang'       => 'required',
+        //     'lolos'             => 'required',
+        //     'cacat'             => 'required',
+        // ]);
 
-        $jahit                    = new Jahit();
-        $jahit->nama_penjahit     = $request->nama_penjahit;
-        $jahit->hasil_potong_pola = $request->hasil_potong_pola;
-        $jahit->nama_barang       = $request->nama_barang;
-        $jahit->lolos             = $request->lolos;
-        $jahit->cacat             = $request->cacat;
+        $tanggal_jahit = Carbon::parse($request->tanggal_jahit)->format('d F Y');
+        $jahit              = new Jahit();
+        $jahit->potong_id   = $request->potong_id;
+        $jahit->tanggal_jahit = $request->tanggal_jahit;
+        $jahit->pegawai_id  = $request->pegawai_id;
+        $jahit->nama_barang = $request->nama_barang;
+        $jahit->lolos       = $request->lolos;
+        $jahit->cacat       = $request->cacat;
         $jahit->save();
 
+        Alert::success('Success', 'Data berhasil di tambah')->autoClose(1000);
         return redirect()->route('jahit.index');
 
     }
@@ -80,9 +84,13 @@ class JahitController extends Controller
      * @param  \App\Models\jahit  $jahit
      * @return \Illuminate\Http\Response
      */
-    public function edit(jahit $jahit)
+    public function edit($id)
     {
-        //
+        $jahit = Jahit::findOrFail($id);
+        $potong  = Potong::all();
+        $data_pegawai = DataPegawai::all();
+        return view('admin.jahit.edit', compact('jahit', 'potong', 'data_pegawai'));
+
     }
 
     /**
@@ -92,9 +100,29 @@ class JahitController extends Controller
      * @param  \App\Models\jahit  $jahit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, jahit $jahit)
+    public function update(Request $request, $id)
     {
-        //
+        // $validated = $request->validate([
+        //     'nama_penjahit'     => 'required',
+        //     'hasil_potong_pola' => 'required',
+        //     'nama_barang'       => 'required',
+        //     'lolos'             => 'required',
+        //     'cacat'             => 'required',
+        // ]);
+
+        $tanggal_jahit = Carbon::parse($request->tanggal_jahit)->format('d F Y');
+        $jahit              = Jahit::findOrFail($id);
+        $jahit->potong_id   = $request->potong_id;
+        $jahit->tanggal_jahit = $request->tanggal_jahit;
+        $jahit->pegawai_id  = $request->pegawai_id;
+        $jahit->nama_barang = $request->nama_barang;
+        $jahit->lolos       = $request->lolos;
+        $jahit->cacat       = $request->cacat;
+        $jahit->save();
+
+        Alert::success('Success', 'Data berhasil di ubah')->autoClose(1000);
+        return redirect()->route('jahit.index');
+
     }
 
     /**
@@ -103,8 +131,13 @@ class JahitController extends Controller
      * @param  \App\Models\jahit  $jahit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(jahit $jahit)
+    public function destroy($id)
     {
-        //
+        $jahit = Jahit::findOrFail($id);
+        $jahit->delete();
+
+        Alert::success('Success', 'Data berhasil di hapus')->autoClose(1000);
+        return redirect()->route('jahit.index');
+
     }
 }

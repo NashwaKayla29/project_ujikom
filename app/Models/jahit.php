@@ -9,16 +9,16 @@ class jahit extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'id_potong', 'nama_barang', 'id_data_pegawai', 'lolos', 'cacat'];
+    protected $fillable = ['id', 'id_potong', 'tanggal_jahit', 'nama_barang', 'pegawai_id', 'lolos', 'cacat'];
 
     public function potong()
     {
         return $this->belongsTo(Potong::class, 'potong_id');
     }
 
-    public function pegawai()
+    public function data_pegawai()
     {
-        return $this->belongsTo(DataPegawai::class, 'data_pegawai_id');
+        return $this->belongsTo(DataPegawai::class, 'pegawai_id');
     }
 
     public function qcs()

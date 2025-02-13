@@ -21,7 +21,7 @@
                                 <th>Tanggal masuk bahan</th>
                                 <th>Masa bahan</th>
                                 <th>Yard</th>
-                                <th>Action</th>
+                                <th class="no-export">Action</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -31,18 +31,53 @@
                                     <td>{{ $i++ }}</td>
                                     <td>{{ $data->nama_bahan }}</td>
                                     <td>{{ $data->ukuran_bahan }}</td>
-                                    <td>{{ $data->tanggal_masuk_bahan }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($data->tanggal_masuk_bahan)->format('d F Y') }}</td>
                                     <td>{{ $data->masa_bahan }}</td>
                                     <td>{{ $data->yard }}</td>
-                                    <td>
-                                        <a href="{{ route('bahan.edit', $data->id) }}"
-                                            class="btn btn-warning btn-sm">Edit</a>
-                                        <form action="{{ route('bahan.destroy', $data->id) }}" method="POST"
-                                            style="display:inline;">
+                                    <td class="no-export">
+                                        <form action="{{ route('bahan.destroy', $data->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                    data-bs-toggle="dropdown">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="{{ route('bahan.edit', $data->id) }}">
+                                                        <i class="bx bx-edit-alt me-1"></i> Edit
+                                                    </a>
+                                                    <button type="submit" class="dropdown-item btn-delete" >
+                                                        <i class="bx bx-trash-alt me-1"></i> Delete
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </form>
+                                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                        <script>
+                                            document.querySelectorAll('.btn-delete').forEach(button => {
+                                                button.addEventListener('click', function(event) {
+                                                    event.preventDefault(); // Mencegah form langsung terkirim
+
+                                                    let form = this.closest("form"); // Ambil form terdekat dari tombol
+                                                    let itemId = this.getAttribute('data-id'); // Ambil ID item
+
+                                                    Swal.fire({
+                                                        title: "Are you sure?",
+                                                        text: "You won't be able to revert this!",
+                                                        icon: "warning",
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: "#3085d6",
+                                                        cancelButtonColor: "#d33",
+                                                        confirmButtonText: "Yes, delete it!"
+                                                    }).then((result) => {
+                                                        if (result.isConfirmed) {
+                                                            form.submit(); // Kirim form hanya jika dikonfirmasi
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                        </script>
                                     </td>
                                 </tr>
                             @endforeach
@@ -66,12 +101,14 @@
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
     <script>
-        new DataTable('#example', {
-            layout: {
-                topStart: {
-                    buttons: ['pdf', 'excel']
-                }
-            }
+        document.addEventListener('DOMContentLoaded', function () {
+            const table = new DataTable('#example', {
+                dom: 'Bfrtip',
+                buttons: [
+                    { extend: 'pdf', className: 'btn btn-sm btn-danger', exportOptions: { columns: ':not(.no-export)' } },
+                    { extend: 'excel', className: 'btn btn-sm btn-success', exportOptions: { columns: ':not(.no-export)' } }
+                ]
+            });
         });
     </script>
 @endpush

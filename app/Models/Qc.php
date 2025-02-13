@@ -9,13 +9,13 @@ class Qc extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'id_jahit', 'id_data_Qc', 'lolos_Qc', 'cacat_jual', 'cacat_permanen'];
+    protected $fillable = ['id', 'jahit_id', 'qc_id', 'lolos_Qc', 'cacat_jual', 'cacat_permanen'];
     // protected $table = ['Bahan'];
     public $timestamps = true;
 
     public function data_Qc()
     {
-        return $this->belongsTo(DataQc::class, 'data_Qc_id');
+        return $this->belongsTo(data_Qc::class, 'qc_id');
     }
 
     public function jahit()

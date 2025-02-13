@@ -7,36 +7,55 @@
             <h5 class="mb-0">Tambah Jahit</h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('jahit.store') }}" method="POST">
+            <form action="{{ route('jahit.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                <div class=" row mb-3">
-                    <label class="col-sm-2 col-form-label" for="basic-default-fullname">Nama penjahit</label>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="basic-default-fullname">Nama Penjahit</label>
                     <div class="col-sm-10">
-                        <select class="form-control" name="id_data_pegawai" id="jahit">
-                            @foreach ($data_Qc as $data)
-                                <option value="{{ $data->id }}">{{ $data->Nama_barang }}</option>
+                        <select name="pegawai_id" class="form-control">
+                            <option value="" disabled selected>Pilih Barang</option>
+                            @foreach ($data_pegawai as $data)
+                                <option value="{{ $data->id }}">{{ $data->nama_pegawai }}</option>
                             @endforeach
                         </select>
+                        @error('pegawai_id')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
-                <div class=" row mb-3">
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" for="basic-default-fullname">Tanggal jahit</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" id="tanggal_jahit" placeholder="tanggal jahit"
+                            name="tanggal_jahit" />
+                        @error('tanggal_jahit')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="basic-default-fullname">Hasil potong pola</label>
                     <div class="col-sm-10">
-                        <select class="form-control" name="id_potong" id="jahit">
+                        <select name="potong_id" class="form-control">
+                            <option value="" disabled selected>Pilih Barang</option>
                             @foreach ($potong as $data)
                                 <option value="{{ $data->id }}">{{ $data->hasil_potong_pola }}</option>
                             @endforeach
                         </select>
+                        @error('potong_id')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="basic-default-fullname">Nama barang</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="nama_barang" value="{{ old('nama_barang') }}"
-                            placeholder="nama barang" name="nama_barang" />
+                        <input type="text" class="form-control" id="nama_barang" placeholder="nama barang"
+                            name="nama_barang" />
                         @error('nama_barang')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -46,8 +65,8 @@
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="basic-default-fullname">Lolos</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="lolos" value="{{ old('lolos') }}"
-                            placeholder="lolos" name="lolos" />
+                        <input type="teks" class="form-control" id="lolos" placeholder="lolos"
+                            name="lolos" />
                         @error('lolos')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -57,17 +76,18 @@
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="basic-default-fullname">Cacat</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="cacat" value="{{ old('cacat') }}"
-                            placeholder="cacat" name="cacat" />
+                        <input type="teks" class="form-control" id="cacat" placeholder="cacat"
+                            name="cacat" />
                         @error('cacat')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
 
+                
                 <div class="row justify-content-end">
                     <div class="col-sm-10">
-                        <a href="{{ route('bahan.index') }} " class="btn btn-primary">Back</a>
+                        <a href="{{ route('jahit.index') }} " class="btn btn-primary">Back</a>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </div>

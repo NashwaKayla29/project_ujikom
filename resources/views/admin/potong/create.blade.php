@@ -7,7 +7,7 @@
             <h5 class="mb-0">Tambah Potong</h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('potong.store') }}" method="POST">
+            <form action="{{ route('potong.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row mb-3">
@@ -71,3 +71,12 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#potong').select2();
+        });
+    </script>
+@endpush

@@ -9,8 +9,8 @@
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Data pegawai</h4>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-header">Table data pegawai <a href="{{ route('data_pegawai.create') }}" class="btn btn-sm btn-primary"
-                    style="float: right"> + Tambah Data</a></h5>
+            <h4 class="card-header">Table data pegawai <a href="{{ route('data_pegawai.create') }}"
+                    class="btn btn-sm btn-primary" style="float: right"> + Tambah Data</a></h5>
                 <div class="table-responsive text-nowrap">
                     <table class="table table-bordered" id="example">
                         <thead>
@@ -27,14 +27,51 @@
                                     <td>{{ $i++ }}</td>
                                     <td>{{ $data->nama_pegawai }}</td>
                                     <td>
-                                        <a href="{{ route('data_pegawai.edit', $data->id) }}"
-                                            class="btn btn-warning btn-sm">Edit</a>
-                                        <form action="{{ route('data_pegawai.destroy', $data->id) }}" method="POST"
-                                            style="display:inline;">
+                                        <form action="{{ route('data_pegawai.destroy', $data->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                            <div class="dropdown">
+                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                                    data-bs-toggle="dropdown">
+                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('data_pegawai.edit', $data->id) }}">
+                                                        <i class="bx bx-edit-alt me-1"></i> Edit
+                                                    </a>
+                                                    <button type="submit" class="dropdown-item btn-delete"
+                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus ini?')">
+                                                        <i class="bx bx-trash-alt me-1"></i> Delete
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </form>
+                                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+                                        <script>
+                                            document.querySelectorAll('.btn-delete').forEach(button => {
+                                                button.addEventListener('click', function(event) {
+                                                    event.preventDefault(); // Mencegah form langsung terkirim
+
+                                                    let form = this.closest("form"); // Ambil form terdekat dari tombol
+                                                    let itemId = this.getAttribute('data-id'); // Ambil ID item
+
+                                                    Swal.fire({
+                                                        title: "Are you sure?",
+                                                        text: "You won't be able to revert this!",
+                                                        icon: "warning",
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: "#3085d6",
+                                                        cancelButtonColor: "#d33",
+                                                        confirmButtonText: "Yes, delete it!"
+                                                    }).then((result) => {
+                                                        if (result.isConfirmed) {
+                                                            form.submit(); // Kirim form hanya jika dikonfirmasi
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                        </script>
                                     </td>
                                 </tr>
                             @endforeach

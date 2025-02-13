@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Data_Qc;
+Use Alert;
 use Illuminate\Http\Request;
 
 class DataQcController extends Controller
@@ -45,6 +46,7 @@ class DataQcController extends Controller
         $data_Qc->nama_QC = $request->nama_Qc;
         $data_Qc->save();
 
+        Alert::success('Success', 'Data berhasil di tambah')->autoClose(1000);
         return redirect()->route('data_Qc.index');
 
     }
@@ -90,6 +92,7 @@ class DataQcController extends Controller
         $data_Qc->nama_Qc = $request->nama_Qc;
         $data_Qc->save();
 
+        Alert::success('Success', 'Data berhasil di ubah')->autoClose(1000);
         return redirect()->route('data_Qc.index');
 
     }
@@ -104,6 +107,8 @@ class DataQcController extends Controller
     {
         $data_Qc = Data_Qc::findOrFail($id);
         $data_Qc->delete();
+
+        Alert::success('Success', 'Data berhasil di hapus')->autoClose(1000);
         return redirect()->route('data_Qc.index');
 
     }

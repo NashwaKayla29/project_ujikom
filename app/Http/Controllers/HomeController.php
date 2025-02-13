@@ -2,7 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\bahan;
+use App\Models\DataPegawai;
+use App\Models\data_Qc;
+use App\Models\jahit;
+use App\Models\potong;
+use App\Models\Qc;
+
+
 
 class HomeController extends Controller
 {
@@ -23,6 +30,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $bahan = Bahan::count();
+        $data_Qc = data_Qc::count();
+        $data_pegawai = DataPegawai::count();
+        $jahit = Jahit::count();
+        $potong = Potong::count();
+        $Qc = Qc::count();
+
+        return view('home', compact( 'bahan', 'data_pegawai', 'data_Qc', 'jahit', 'potong', 'Qc'));
     }
 }
