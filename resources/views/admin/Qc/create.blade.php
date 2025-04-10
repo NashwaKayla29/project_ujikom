@@ -3,7 +3,7 @@
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Table/</span> Qc</h4>
 
     <div class="card mb-4">
-        <div class="card-header d-flex align-items-center justify-content-between">
+        <div class="card-header d-flex align-items-center    justify-content-between">
             <h5 class="mb-0">Tambah Qc</h5>
         </div>
         <div class="card-body">
@@ -80,8 +80,8 @@
                 
                 <div class="row justify-content-end">
                     <div class="col-sm-10">
-                        <a href="{{ route('Qc.index') }} " class="btn btn-primary">Back</a>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="{{ route('Qc.index') }} " class="btn btn-primary">Kembali</a>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
             </form>

@@ -22,8 +22,8 @@
 
                 <div class="row justify-content-end">
                     <div class="col-sm-10">
-                        <a href="{{ route('data_Qc.index') }} " class="btn btn-primary">Back</a>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="{{ route('data_Qc.index') }} " class="btn btn-primary">Kembali</a>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
             </form>

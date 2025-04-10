@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,39 +9,48 @@
         body {
             font-family: Arial, sans-serif;
         }
+
         .header {
             text-align: center;
             margin-bottom: 20px;
         }
+
         .header h1 {
             margin: 0;
         }
+
         .header p {
             margin: 0;
             font-size: 14px;
         }
+
         .table {
             width: 100%;
             border-collapse: collapse;
         }
+
         .table th,
         .table td {
             border: 1px solid #ddd;
             padding: 8px;
         }
+
         .table th {
             background-color: #f2f2f2;
             text-align: center;
         }
+
         .table td {
             text-align: center;
         }
+
         .footer {
             margin-top: 20px;
             text-align: right;
         }
     </style>
 </head>
+
 <body>
     <div class="header">
         <h1>Laporan {{ ucfirst($jenisLaporan) }}</h1>
@@ -52,7 +62,7 @@
                 <th>No</th>
                 <th>Bahan</th>
                 <th>Tanggal</th>
-               
+
             </tr>
         </thead>
         <tbody>
@@ -61,7 +71,6 @@
                     <td>{{ $key + 1 }}</td>
                     <td>{{ $item->nama_bahan }}</td>
                     <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</td>
-                    
                 </tr>
             @endforeach
         </tbody>
@@ -70,4 +79,5 @@
         <p>Total: {{ $total }}</p>
     </div>
 </body>
+
 </html>

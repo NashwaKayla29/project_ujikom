@@ -9,7 +9,7 @@
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Data pegawai</h4>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-header">Table data pegawai <a href="{{ route('data_pegawai.create') }}"
+            <h4 class="card-header">Tabel data pegawai <a href="{{ route('data_pegawai.create') }}"
                     class="btn btn-sm btn-primary" style="float: right"> + Tambah Data</a></h5>
                 <div class="table-responsive text-nowrap">
                     <table class="table table-bordered" id="example">
@@ -17,7 +17,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama pegawai</th>
-                                <th>Action</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -42,7 +42,7 @@
                                                     </a>
                                                     <button type="submit" class="dropdown-item btn-delete"
                                                         onclick="return confirm('Apakah Anda yakin ingin menghapus ini?')">
-                                                        <i class="bx bx-trash-alt me-1"></i> Delete
+                                                        <i class="bx bx-trash-alt me-1"></i> Hapus
                                                     </button>
                                                 </div>
                                             </div>

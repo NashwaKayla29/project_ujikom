@@ -31,7 +31,7 @@
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0 me-3">
                             <span class="avatar-initial rounded bg-label-primary">
-                                <i class="bx bx-package"></i></span>
+                                <i class="bx bx-cube"></i></span>
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown"
@@ -40,13 +40,11 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
                                 <a class="dropdown-item" href="{{ route('bahan.index') }}">View More</a>
-                                {{-- <a class="dropdown-item" href="javascript:void(0);">Delete</a> --}}
                             </div>
                         </div>
                     </div>
                     <h4>Bahan</h4>
                     <h4 class="card-title text-nowrap mb-1">{{ $bahan }}</h4>
-                    {{-- <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> --}}
                 </div>
             </div>
         </div>
@@ -56,7 +54,7 @@
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0 me-3">
                             <span class="avatar-initial rounded bg-label-primary">
-                                <i class="bx bx-package"></i></span>
+                                <i class="bx bx-id-card"></i></span>
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown"
@@ -65,13 +63,11 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
                                 <a class="dropdown-item" href="{{ route('data_pegawai.index') }}">View More</a>
-                                {{-- <a class="dropdown-item" href="javascript:void(0);">Delete</a> --}}
                             </div>
                         </div>
                     </div>
                     <h4>Data pegawai</h4>
                     <h4 class="card-title text-nowrap mb-1">{{ $data_pegawai }}</h4>
-                    {{-- <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> --}}
                 </div>
             </div>
         </div>
@@ -80,7 +76,7 @@
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <span class="avatar-initial rounded bg-label-info"><i class="bx bxs-truck"></i></span>
+                            <span class="avatar-initial rounded bg-label-info"><i class="bx bx-check-shield"></i></span>
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown"
@@ -89,13 +85,11 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
                                 <a class="dropdown-item" href="{{ route('data_Qc.index') }}">View More</a>
-                                {{-- <a class="dropdown-item" href="javascript:void(0);">Delete</a> --}}
                             </div>
                         </div>
                     </div>
                     <h4>Data Qc</h4>
                     <h4 class="card-title text-nowrap mb-1">{{ $data_Qc }}</h4>
-                    {{-- <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> --}}
                 </div>
             </div>
         </div>
@@ -104,7 +98,7 @@
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <span class="avatar-initial rounded bg-label-success"><i class="bx bx-time-five"></i></span>
+                            <span class="avatar-initial rounded bg-label-success"><i class="bx bx-cut"></i></span>
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown"
@@ -112,14 +106,12 @@
                                 <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                <a class="dropdown-item" href="{{ route('potong.index') }}"">View More</a>
-                                {{-- <a class="dropdown-item" href="javascript:void(0);">Delete</a> --}}
+                                <a class="dropdown-item" href="{{ route('potong.index') }}">View More</a>
                             </div>
                         </div>
                     </div>
                     <h4>Potong</h4>
                     <h4 class="card-title text-nowrap mb-1">{{ $potong }}</h4>
-                    {{-- <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> --}}
                 </div>
             </div>
         </div>
@@ -128,7 +120,7 @@
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <span class="avatar-initial rounded bg-label-danger"><i class="bx bx-error"></i></span>
+                            <span class="avatar-initial rounded bg-label-danger"><i class="bx bx-circle"></i></span>
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown"
@@ -137,13 +129,11 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
                                 <a class="dropdown-item" href="{{ route('jahit.index') }}">View More</a>
-                                {{-- <a class="dropdown-item" href="javascript:void(0);">Delete</a> --}}
                             </div>
                         </div>
                     </div>
                     <h4>Jahit</h4>
                     <h4 class="card-title text-nowrap mb-1">{{ $jahit }}</h4>
-                    {{-- <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> --}}
                 </div>
             </div>
         </div>
@@ -152,7 +142,8 @@
                 <div class="card-body">
                     <div class="card-title d-flex align-items-start justify-content-between">
                         <div class="avatar flex-shrink-0">
-                            <span class="avatar-initial rounded bg-label-success"><i class="bx bx-time-five"></i></span>
+                            <span class="avatar-initial rounded bg-label-success"><i
+                                    class="bx bx-check-circle"></i></span>
                         </div>
                         <div class="dropdown">
                             <button class="btn p-0" type="button" id="cardOpt6" data-bs-toggle="dropdown"
@@ -160,17 +151,16 @@
                                 <i class="bx bx-dots-vertical-rounded"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                <a class="dropdown-item" href="{{ route('Qc.index') }}"">View More</a>
-                                {{-- <a class="dropdown-item" href="javascript:void(0);">Delete</a> --}}
+                                <a class="dropdown-item" href="{{ route('Qc.index') }}">View More</a>
                             </div>
                         </div>
                     </div>
                     <h4>Qc</h4>
                     <h4 class="card-title text-nowrap mb-1">{{ $Qc }}</h4>
-                    {{-- <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small> --}}
                 </div>
             </div>
         </div>
+
 
         <div class="row">
             <div class="col-lg-12">

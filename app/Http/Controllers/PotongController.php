@@ -1,10 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
+use Alert;
 use App\Models\bahan;
 use App\Models\potong;
-Use Alert;
-use Carbon;
 use Illuminate\Http\Request;
 
 class PotongController extends Controller
@@ -48,13 +47,21 @@ class PotongController extends Controller
         //     'jumlah_potong'     => 'required',
         //     'tanggal_potong'    => 'required',
         // ]);
+        $bahan = Bahan::findOrFail($request->bahan_id);
 
-        $tanggal_potong = Carbon::parse($request->tanggal_potong)->format('d F Y');
+        if ($request->jumlah_potong > $bahan->stok) {
+            return redirect()->route('potong.create')->with(['error' => 'Stok Kurang!']);
+        }
+
         $potong                    = new Potong();
         $potong->bahan_id          = $request->bahan_id;
         $potong->hasil_potong_pola = $request->hasil_potong_pola;
         $potong->jumlah_potong     = $request->jumlah_potong;
         $potong->tanggal_potong    = $request->tanggal_potong;
+
+        $bahan->stok -= $request->jumlah_potong;
+        $bahan->save();
+
         $potong->save();
 
         Alert::success('Success', 'Data berhasil di tambah')->autoClose(1000);
@@ -82,7 +89,7 @@ class PotongController extends Controller
     public function edit($id)
     {
         $potong = Potong::findOrFail($id);
-        $bahan = Bahan::all();
+        $bahan  = Bahan::all();
         return view('admin.potong.edit', compact('potong', 'bahan'));
 
     }
@@ -103,7 +110,6 @@ class PotongController extends Controller
             'tanggal_potong'    => 'required',
         ]);
 
-        $tanggal_potong = Carbon::parse($request->tanggal_potong)->format('d F Y');
         $potong                    = Potong::findOrFail($id);
         $potong->bahan_id          = $request->bahan_id;
         $potong->hasil_potong_pola = $request->hasil_potong_pola;

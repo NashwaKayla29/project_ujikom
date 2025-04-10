@@ -44,15 +44,18 @@ class BahanController extends Controller
             'tanggal_masuk_bahan' => 'required',
             'masa_bahan'          => 'required',
             'yard'                => 'required',
+            'stok'                => 'required',
         ]);
+        
 
-        $tanggal_masuk_bahan = Carbon::parse($request->tanggal_masuk_bahan)->format('d F Y');
+
         $bahan                      = new Bahan();
         $bahan->nama_bahan          = $request->nama_bahan;
         $bahan->ukuran_bahan        = $request->ukuran_bahan;
         $bahan->tanggal_masuk_bahan = $request->tanggal_masuk_bahan;
         $bahan->masa_bahan          = $request->masa_bahan;
         $bahan->yard                = $request->yard;
+        $bahan->stok                = $request->stok;
         $bahan->save();
 
         Alert::success('Success', 'Data berhasil di tambah')->autoClose(1000);
@@ -99,15 +102,16 @@ class BahanController extends Controller
             'tanggal_masuk_bahan' => 'required',
             'masa_bahan'          => 'required',
             'yard'                => 'required',
+            'stok'                => 'required',
         ]);
 
-        $tanggal_masuk_bahan = Carbon::parse($request->tanggal_masuk_bahan)->format('d F Y');
         $bahan                      = Bahan::findOrFail($id);
         $bahan->nama_bahan          = $request->nama_bahan;
         $bahan->ukuran_bahan        = $request->ukuran_bahan;
         $bahan->tanggal_masuk_bahan = $request->tanggal_masuk_bahan;
         $bahan->masa_bahan          = $request->masa_bahan;
         $bahan->yard                = $request->yard;
+        $bahan->stok = $request->stok;
         $bahan->save();
 
         Alert::success('Success', 'Data berhasil di ubah')->autoClose(1000);

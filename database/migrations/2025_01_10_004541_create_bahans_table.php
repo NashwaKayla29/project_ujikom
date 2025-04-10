@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('tanggal_masuk_bahan');
             $table->string('masa_bahan');
             $table->string('yard');
+            $table->integer('stok');
             $table->timestamps();
         });
     }

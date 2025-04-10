@@ -9,7 +9,7 @@
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Bahan</h4>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-header">Table bahan <a href="{{ route('bahan.create') }}" class="btn btn-sm btn-primary"
+            <h4 class="card-header">Tabel bahan <a href="{{ route('bahan.create') }}" class="btn btn-sm btn-primary"
                     style="float: right"> + Tambah Data</a></h5>
                 <div class="table-responsive text-nowrap">
                     <table class="table table-bordered" id="example">
@@ -21,7 +21,8 @@
                                 <th>Tanggal masuk bahan</th>
                                 <th>Masa bahan</th>
                                 <th>Yard</th>
-                                <th class="no-export">Action</th>
+                                <th>Stok</th>
+                                <th class="no-export">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -31,9 +32,10 @@
                                     <td>{{ $i++ }}</td>
                                     <td>{{ $data->nama_bahan }}</td>
                                     <td>{{ $data->ukuran_bahan }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($data->tanggal_masuk_bahan)->format('d F Y') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($data->tanggal_masuk_bahan)->format('d M Y') }}</td>
                                     <td>{{ $data->masa_bahan }}</td>
                                     <td>{{ $data->yard }}</td>
+                                    <td>{{ $data->stok }}</td>
                                     <td class="no-export">
                                         <form action="{{ route('bahan.destroy', $data->id) }}" method="POST">
                                             @csrf
@@ -47,8 +49,8 @@
                                                     <a class="dropdown-item" href="{{ route('bahan.edit', $data->id) }}">
                                                         <i class="bx bx-edit-alt me-1"></i> Edit
                                                     </a>
-                                                    <button type="submit" class="dropdown-item btn-delete" >
-                                                        <i class="bx bx-trash-alt me-1"></i> Delete
+                                                    <button type="submit" class="dropdown-item btn-delete">
+                                                        <i class="bx bx-trash-alt me-1"></i> Hapus
                                                     </button>
                                                 </div>
                                             </div>
@@ -101,12 +103,23 @@
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const table = new DataTable('#example', {
                 dom: 'Bfrtip',
-                buttons: [
-                    { extend: 'pdf', className: 'btn btn-sm btn-danger', exportOptions: { columns: ':not(.no-export)' } },
-                    { extend: 'excel', className: 'btn btn-sm btn-success', exportOptions: { columns: ':not(.no-export)' } }
+                buttons: [{
+                        extend: 'pdf',
+                        className: 'btn btn-sm btn-danger',
+                        exportOptions: {
+                            columns: ':not(.no-export)'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-sm btn-success',
+                        exportOptions: {
+                            columns: ':not(.no-export)'
+                        }
+                    }
                 ]
             });
         });

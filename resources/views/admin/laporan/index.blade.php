@@ -24,11 +24,11 @@
                                 </select>
                             </div>
                             <div class="mb-4 form-group">
-                                <label for="tanggalAwal">Date Start</label>
+                                <label for="tanggalAwal">Tanggal Mulai</label>
                                 <input type="date" name="tanggalAwal" id="tanggalAwal" class="form-control">
                             </div>
                             <div class="mb-4 form-group">
-                                <label for="tanggalAkhir">Date End</label>
+                                <label for="tanggalAkhir">Tanggal Akhir</label>
                                 <input type="date" name="tanggalAkhir" id="tanggalAkhir" class="form-control">
                             </div>
                             <div class="mb-4 form-group">

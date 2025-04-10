@@ -52,7 +52,7 @@ class JahitController extends Controller
         //     'cacat'             => 'required',
         // ]);
 
-        $tanggal_jahit = Carbon::parse($request->tanggal_jahit)->format('d F Y');
+       
         $jahit              = new Jahit();
         $jahit->potong_id   = $request->potong_id;
         $jahit->tanggal_jahit = $request->tanggal_jahit;
@@ -110,7 +110,7 @@ class JahitController extends Controller
         //     'cacat'             => 'required',
         // ]);
 
-        $tanggal_jahit = Carbon::parse($request->tanggal_jahit)->format('d F Y');
+        
         $jahit              = Jahit::findOrFail($id);
         $jahit->potong_id   = $request->potong_id;
         $jahit->tanggal_jahit = $request->tanggal_jahit;

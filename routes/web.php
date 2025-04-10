@@ -39,9 +39,12 @@ Route::resource('data_Qc', DataQcController::class);
 Route::resource('jahit', JahitController::class);
 Route::resource('potong', PotongController::class);
 Route::resource('Qc', QcController::class);
-Route::resource('laporan', LaporanController::class);
+Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+
 
 
 
 Route::post('laporan', [LaporanController::class, 'report'])->name('report');
-Route::post('print-laporan', [LaporanController::class, 'printReport'])->name('printReport');
+Route::get('/laporan/print', [LaporanController::class, 'printReport'])->name('printReport');
+
+

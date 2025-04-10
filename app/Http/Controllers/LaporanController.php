@@ -5,80 +5,104 @@ use Alert;
 use App\Models\Bahan;
 use App\Models\Jahit;
 use App\Models\Potong;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class LaporanController extends Controller
 {
+    public function boot()
+    {
+        Carbon::setLocale('id');
+    }
+
     public function index()
     {
         return view('admin.laporan.index');
     }
 
     public function report(Request $request)
-    {
-        $start        = $request->tanggalAwal;
-        $end          = $request->tanggalAkhir;
-        $jenisLaporan = $request->jenisLaporan;
+{
+    $start        = Carbon::parse($request->tanggalAwal)->startOfDay();
+    $end          = Carbon::parse($request->tanggalAkhir)->endOfDay();
+    $jenisLaporan = $request->jenisLaporan;
 
-        if ($start > $end) {
-            Alert::warning('Warning', 'Tanggal yang dimasukkan tidak sesuai');
+    if ($start > $end) {
+        Alert::warning('Warning', 'Tanggal yang dimasukkan tidak sesuai');
+        return back();
+    }
+
+    switch ($jenisLaporan) {
+        case 'Bahan':
+            $query = Bahan::whereBetween('tanggal_masuk_bahan', [$start, $end])->get();
+            $total = Bahan::whereBetween('tanggal_masuk_bahan', [$start, $end])->count();
+            break;
+
+        case 'Jahit':
+            $query = Jahit::whereBetween('created_at', [$start, $end])->get();
+            $total = Jahit::whereBetween('created_at', [$start, $end])->count();
+            break;
+
+        case 'Potong':
+            $query = Potong::whereBetween('created_at', [$start, $end])->get();
+            $total = Potong::whereBetween('created_at', [$start, $end])->count();
+            break;
+
+        default:
+            Alert::warning('Warning', 'Jenis laporan tidak valid');
             return back();
-        }
+    }
 
-        switch ($jenisLaporan) {
-    case 'Bahan':
-        $query = Bahan::whereBetween('bahans.created_at', [$start, $end])->get();
-        $total = Bahan::whereBetween('created_at', [$start, $end])->count();
-        break;
-    case 'Jahit':
-        $query = Jahit::whereBetween('jahits.created_at', [$start, $end])->get();
-        $total = Jahit::whereBetween('created_at', [$start, $end])->count();
-        break;
-    case 'Potong':
-        $query = Potong::whereBetween('potongs.created_at', [$start, $end])->get();
-        $total = Potong::whereBetween('created_at', [$start, $end])->count();
-        break;
-    default:
-        Alert::warning('Warning', 'Jenis laporan tidak valid');
-        return back();
+
+
+    return view('admin.laporan.report', [
+        'data'         => $query,
+        'total'        => $total,
+        'start'        => $start,
+        'end'          => $end,
+        'jenisLaporan' => $jenisLaporan,
+    ]);
 }
 
 
-        return view('admin.laporan.report', [
-            'data'         => $query,
-            'total'        => $total,
-            'start'        => $start,
-            'end'          => $end,
-            'jenisLaporan' => $jenisLaporan,
-        ]);
+public function printReport(Request $request)
+{
+    $start = $request->tanggalAwal;
+    $end = $request->tanggalAkhir;
+    $jenisLaporan = $request->jenisLaporan;
+
+    $startDate = Carbon::parse($start)->startOfDay();
+    $endDate = Carbon::parse($end)->endOfDay();
+
+    switch ($jenisLaporan) {
+        case 'Bahan':
+            $query = Bahan::whereBetween('created_at', [$startDate, $endDate])->get();
+            $total = $query->count();
+            break;
+        case 'Jahit':
+            $query = Jahit::whereBetween('created_at', [$startDate, $endDate])->get();
+            $total = $query->count();
+            break;
+        case 'Potong':
+            $query = Potong::whereBetween('created_at', [$startDate, $endDate])->get();
+            $total = $query->count();
+            break;
+        default:
+            Alert::warning('Warning', 'Jenis laporan tidak valid');
+            return back();
     }
 
-    public function printReport(Request $request)
-    {
-        $start        = $request->tanggalAwal;
-        $end          = $request->tanggalAkhir;
-        $jenisLaporan = $request->jenisLaporan;
+    $pdf = PDF::loadView('admin.laporan.report_pdf', [
+        'query' => $query,
+        'start' => $start,
+        'end' => $end,
+        'jenisLaporan' => $jenisLaporan,
+        'total' => $total,
+    ]);
 
-        switch ($jenisLaporan) {
-    case 'Bahan':
-        $query = Bahan::whereBetween('bahans.created_at', [$start, $end])->get();
-        $total = Bahan::whereBetween('created_at', [$start, $end])->count();
-        break;
-    case 'Jahit':
-        $query = Jahit::whereBetween('jahits.created_at', [$start, $end])->get();
-        $total = Jahit::whereBetween('created_at', [$start, $end])->count();
-        break;
-    case 'Potong':
-        $query = Potong::whereBetween('potongs.created_at', [$start, $end])->get();
-        $total = Potong::whereBetween('created_at', [$start, $end])->count();
-        break;
-    default:
-        Alert::warning('Warning', 'Jenis laporan tidak valid');
-        return back();
+    return $pdf->download('laporan-' . $jenisLaporan . '.pdf');
 }
 
 
-        $pdf = \PDF::loadView('admin.laporan.report_pdf', compact('query', 'start', 'end', 'jenisLaporan', 'total'));
-        return $pdf->download('laporan-' . $jenisLaporan . '.pdf');
-    }
 }
