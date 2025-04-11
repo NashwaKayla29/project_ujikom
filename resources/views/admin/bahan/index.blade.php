@@ -22,6 +22,7 @@
                                 <th>Masa bahan</th>
                                 <th>Yard</th>
                                 <th>Stok</th>
+                                <th>Keterangan</th>
                                 <th class="no-export">Aksi</th>
                             </tr>
                         </thead>
@@ -36,6 +37,7 @@
                                     <td>{{ $data->masa_bahan }}</td>
                                     <td>{{ $data->yard }}</td>
                                     <td>{{ $data->stok }}</td>
+                                    <td>{{ $data->keterangan }}</td>
                                     <td class="no-export">
                                         <form action="{{ route('bahan.destroy', $data->id) }}" method="POST">
                                             @csrf

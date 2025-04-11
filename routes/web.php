@@ -6,6 +6,7 @@ use App\Http\Controllers\DataQcController;
 use App\Http\Controllers\JahitController;
 use App\Http\Controllers\PotongController;
 use App\Http\Controllers\QcController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LaporanController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,7 @@ Route::resource('data_Qc', DataQcController::class);
 Route::resource('jahit', JahitController::class);
 Route::resource('potong', PotongController::class);
 Route::resource('Qc', QcController::class);
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
 
 

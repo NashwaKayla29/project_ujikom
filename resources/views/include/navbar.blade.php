@@ -47,6 +47,12 @@
                             </div>
                         </a>
                     </li>
+                    <li>
+                      <a class="dropdown-item" href="{{route('profile.index')}}">
+                        <i class="bx bx-user me-2"></i>
+                        <span class="align-middle">My Profile</span>
+                      </a>
+                    </li>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>

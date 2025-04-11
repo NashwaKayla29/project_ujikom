@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\BahanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +20,15 @@ Route::prefix('bahan')->group(function () {
     Route::delete('/{id}', [BahanController::class, 'destroy']);
 });
 
+// Route::middleware('auth:sanctum')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'show']);
+//     Route::put('/profile', [ProfileController::class, 'update']);
+// });
+
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
+
 
     // Route::get('/bahan', [BahanController::class, 'index']);
     // Route::post('/bahan', [BahanController::class, 'store']);
@@ -32,3 +39,6 @@ Route::middleware('auth:sanctum')->group(function () {
     // Route::resource('bahan', BahanController::class)->except('create', 'edit');
 
 });
+
+Route::middleware('auth:sanctum')->get('/profile', [ProfileController::class, 'profile']);
+

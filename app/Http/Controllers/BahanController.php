@@ -1,9 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use Alert;
 use App\Models\Bahan;
-Use Alert;
-use Carbon;
 use Illuminate\Http\Request;
 
 class BahanController extends Controller
@@ -45,9 +44,9 @@ class BahanController extends Controller
             'masa_bahan'          => 'required',
             'yard'                => 'required',
             'stok'                => 'required',
+            'stok_sisa'           => 'required',
+            'keterangan'          => 'required',
         ]);
-        
-
 
         $bahan                      = new Bahan();
         $bahan->nama_bahan          = $request->nama_bahan;
@@ -56,6 +55,8 @@ class BahanController extends Controller
         $bahan->masa_bahan          = $request->masa_bahan;
         $bahan->yard                = $request->yard;
         $bahan->stok                = $request->stok;
+        $bahan->stok_sisa           = $request->stok_sisa;
+        $bahan->keterangan          = $request->keterangan;
         $bahan->save();
 
         Alert::success('Success', 'Data berhasil di tambah')->autoClose(1000);
@@ -103,6 +104,8 @@ class BahanController extends Controller
             'masa_bahan'          => 'required',
             'yard'                => 'required',
             'stok'                => 'required',
+            'stok_sisa'           => 'required',
+            'keterangan'          => 'required',
         ]);
 
         $bahan                      = Bahan::findOrFail($id);
@@ -111,7 +114,10 @@ class BahanController extends Controller
         $bahan->tanggal_masuk_bahan = $request->tanggal_masuk_bahan;
         $bahan->masa_bahan          = $request->masa_bahan;
         $bahan->yard                = $request->yard;
-        $bahan->stok = $request->stok;
+        $bahan->stok                = $request->stok;
+        $bahan->stok_sisa           = $request->stok_sisa;
+        $bahan->keterangan          = $request->keterangan;
+
         $bahan->save();
 
         Alert::success('Success', 'Data berhasil di ubah')->autoClose(1000);
