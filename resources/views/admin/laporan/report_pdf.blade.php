@@ -4,80 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laporan {{ ucfirst($jenisLaporan) }}</title>
+    <title>Laporan </title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .header h1 {
-            margin: 0;
-        }
-
-        .header p {
-            margin: 0;
-            font-size: 14px;
-        }
-
-        .table {
+        table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .table th,
-        .table td {
-            border: 1px solid #ddd;
-            padding: 8px;
+        table,
+        th,
+        td {
+            border: 1px solid black;
         }
 
-        .table th {
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
             background-color: #f2f2f2;
-            text-align: center;
-        }
-
-        .table td {
-            text-align: center;
-        }
-
-        .footer {
-            margin-top: 20px;
-            text-align: right;
         }
     </style>
 </head>
 
 <body>
-    <div class="header">
-        <h1>Laporan {{ ucfirst($jenisLaporan) }}</h1>
-        <p>Periode: {{ \Carbon\Carbon::parse($start)->format('d M Y') }} - {{ \Carbon\Carbon::parse($end)->format('d M Y') }}</p>
-    </div>
-    <table class="table">
+    <h1>Laporan Absensi</h1>
+    <p>Periode: {{ request('tanggal_mulai') }} - {{ request('tanggal_selesai') }}</p>
+    <table>
         <thead>
             <tr>
                 <th>No</th>
-                <th>Bahan</th>
+                <th>Nama Bahan</th>
                 <th>Tanggal</th>
-
+                <th>Jam Masuk</th>
+                <th>Jam Pulang</th>
+                <th>Status</th>
+                <th>Jam Kerja</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($query as $key => $item)
+            @foreach ($report as $report)
                 <tr>
-                    <td>{{ $key + 1 }}</td>
-                    <td>{{ $item->nama_bahan }}</td>
-                    <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d M Y') }}</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $absensi->pegawai ? $absensi->pegawai->name : 'N/A' }}</td>
+                    <td>{{ $absensi->tanggal  }}</td>
+                    <td>{{ $absensi->jam_masuk }}</td>
+                    <td>{{ $absensi->jam_keluar }}</td>
+                    <td>{{ $absensi->status }}</td>
+                    <td>{{ $absensi->jam_kerja }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    <div class="footer">
-        <p>Total: {{ $total }}</p>
-    </div>
 </body>
 
 </html>

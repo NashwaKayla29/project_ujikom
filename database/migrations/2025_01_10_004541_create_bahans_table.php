@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('masa_bahan');
             $table->string('yard');
             $table->integer('stok');
-            $table->integer('stok_sisa');
             $table->string('keterangan');
             $table->timestamps();
         });

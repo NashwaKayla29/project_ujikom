@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\JsonResponse;
 use App\Models\Bahan;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -36,10 +37,12 @@ class BahanController extends Controller
             'tanggal_masuk_bahan' => 'required|date',
             'masa_bahan'          => 'required',
             'yard'                => 'required|numeric',
+            'stok'                => 'required',
+            'keterangan'          => 'required',
         ]);
 
         $validated['tanggal_masuk_bahan'] = Carbon::parse($request->tanggal_masuk_bahan)->format('Y-m-d');
-        $bahan                            = ModelBahan::create($validated);
+        $bahan                            = Bahan::create($validated);
 
         return response()->json(['success' => true, 'message' => 'Data berhasil ditambahkan', 'data' => $bahan], 201);
     }
@@ -77,6 +80,8 @@ class BahanController extends Controller
             'tanggal_masuk_bahan' => 'required|date',
             'masa_bahan'          => 'required',
             'yard'                => 'required|numeric',
+            'stok'                => 'required',
+            'keterangan'          => 'required',
         ]);
 
         $bahan = Bahan::find($id);

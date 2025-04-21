@@ -44,7 +44,6 @@ class BahanController extends Controller
             'masa_bahan'          => 'required',
             'yard'                => 'required',
             'stok'                => 'required',
-            'stok_sisa'           => 'required',
             'keterangan'          => 'required',
         ]);
 
@@ -55,7 +54,6 @@ class BahanController extends Controller
         $bahan->masa_bahan          = $request->masa_bahan;
         $bahan->yard                = $request->yard;
         $bahan->stok                = $request->stok;
-        $bahan->stok_sisa           = $request->stok_sisa;
         $bahan->keterangan          = $request->keterangan;
         $bahan->save();
 
@@ -104,7 +102,6 @@ class BahanController extends Controller
             'masa_bahan'          => 'required',
             'yard'                => 'required',
             'stok'                => 'required',
-            'stok_sisa'           => 'required',
             'keterangan'          => 'required',
         ]);
 
@@ -115,7 +112,6 @@ class BahanController extends Controller
         $bahan->masa_bahan          = $request->masa_bahan;
         $bahan->yard                = $request->yard;
         $bahan->stok                = $request->stok;
-        $bahan->stok_sisa           = $request->stok_sisa;
         $bahan->keterangan          = $request->keterangan;
 
         $bahan->save();

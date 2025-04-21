@@ -24,50 +24,42 @@
         </li>
 
 
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-table"></i>
-                <div data-i18n="Form Layouts">Tabel</div>
-            </a>
-            <ul class="menu-sub">
+       
                 <li class="menu-item">
                     <a href="{{ route('bahan.index') }}" class="menu-link">
+                        <i class="menu-icon bx bx-cube"></i>
                         <div data-i18n="Layouts">Bahan</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="{{ route('data_pegawai.index') }}" class="menu-link">
+                        <i class="menu-icon bx bx-id-card"></i>
                         <div data-i18n="Barang Masuk">Data pegawai</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="{{ route('data_Qc.index') }}" class="menu-link">
+                        <i class="menu-icon bx bx-check-shield"></i>
                         <div data-i18n="data_Qc">Data Qc</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="{{ route('potong.index') }}"class="menu-link">
+                        <i class="menu-icon bx bx-cut"></i>
                         <div data-i18n="potong">Potong</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="{{ route('jahit.index') }}"class="menu-link">
+                        <i class="menu-icon bx bx-circle"></i>
                         <div data-i18n="jahit">Jahit</div>
                     </a>
                 </li>
                 <li class="menu-item">
                     <a href="{{ route('Qc.index') }}"class="menu-link">
+                        <i class="menu-icon bx bx-check-circle"></i>
                         <div data-i18n="Qc">Qc</div>
                     </a>
                 </li>
-            </ul>
-        </li>
-
-        <li class="menu-item">
-            <a href="{{ route('laporan.index') }}"class="menu-link">
-                 <i class='menu-icon ft-icons bx bxs-file-doc'></i>
-                   <div data-i18n="laporan">Laporan</div>
-            </a>
-        </li>
 
 </aside>

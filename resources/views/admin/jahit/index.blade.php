@@ -22,7 +22,7 @@
                                 <th>Nama barang</th>
                                 <th>Lolos</th>
                                 <th>Cacat</th>
-                                <th>Aksi</th>
+                                <th class="no-export">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
@@ -104,12 +104,25 @@
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"></script>
     <script>
-        new DataTable('#example', {
-            layout: {
-                topStart: {
-                    buttons: ['pdf', 'excel']
-                }
-            }
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = new DataTable('#example', {
+                dom: 'Bfrtip',
+                buttons: [{
+                        extend: 'pdf',
+                        className: 'btn btn-sm btn-danger',
+                        exportOptions: {
+                            columns: ':not(.no-export)'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-sm btn-success',
+                        exportOptions: {
+                            columns: ':not(.no-export)'
+                        }
+                    }
+                ]
+            });
         });
     </script>
 @endpush

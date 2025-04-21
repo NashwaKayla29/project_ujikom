@@ -77,17 +77,6 @@
                 </div>
 
                 <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label" for="basic-default-fullname">Stok sisa</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="stok" value="{{ old('stok_sisa') }}"
-                            placeholder="Stok sisa" name="stok_sisa" />
-                        @error('stok_sisa')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="row mb-3">
                     <label class="col-sm-2 col-form-label" for="basic-default-fullname">Keterangan</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="keterangan" value="{{ old('keterangan') }}"

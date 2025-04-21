@@ -2,6 +2,12 @@
 
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\BahanController;
+use App\Http\Controllers\Api\DataPegawaiController;
+use App\Http\Controllers\Api\DataQcController;
+use App\Http\Controllers\Api\PotongController;
+use App\Http\Controllers\Api\JahitController;
+use App\Http\Controllers\Api\QcController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,10 +26,46 @@ Route::prefix('bahan')->group(function () {
     Route::delete('/{id}', [BahanController::class, 'destroy']);
 });
 
-// Route::middleware('auth:sanctum')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'show']);
-//     Route::put('/profile', [ProfileController::class, 'update']);
-// });
+Route::prefix('data_pegawai')->group(function () {
+    Route::get('/', [DataPegawaiController::class, 'index']);
+    Route::post('/', [DataPegawaiController::class, 'store']);
+    Route::get('/{id}', [DataPegawaiController::class, 'show']);
+    Route::put('/{id}', [DataPegawaiController::class, 'update']);
+    Route::delete('/{id}', [DataPegawaiController::class, 'destroy']);
+});
+
+Route::prefix('data_qc')->group(function () {
+    Route::get('/', [DataQcController::class, 'index']);
+    Route::post('/', [DataQcController::class, 'store']);
+    Route::get('/{id}', [DataQcController::class, 'show']);
+    Route::put('/{id}', [DataQcController::class, 'update']);
+    Route::delete('/{id}', [DataQcController::class, 'destroy']);
+});
+
+Route::prefix('potong')->group(function () {
+    Route::get('/', [PotongController::class, 'index']);
+    Route::post('/', [PotongController::class, 'store']);
+    Route::get('/{id}', [PotongController::class, 'show']);
+    Route::put('/{id}', [PotongController::class, 'update']);
+    Route::delete('/{id}', [PotongController::class, 'destroy']);
+});
+
+Route::prefix('jahit')->group(function () {
+    Route::get('/', [JahitController::class, 'index']);
+    Route::post('/', [JahitController::class, 'store']);
+    Route::get('/{id}', [JahitController::class, 'show']);
+    Route::put('/{id}', [JahitController::class, 'update']);
+    Route::delete('/{id}', [JahitController::class, 'destroy']);
+});
+
+Route::prefix('qc')->group(function () {
+    Route::get('/', [QcController::class, 'index']);
+    Route::post('/', [QcController::class, 'store']);
+    Route::get('/{id}', [QcController::class, 'show']);
+    Route::put('/{id}', [QcController::class, 'update']);
+    Route::delete('/{id}', [QcController::class, 'destroy']);
+});
+
 
 
 Route::middleware('auth:sanctum')->group(function () {
